@@ -1,0 +1,150 @@
+
+# Casos de Uso 
+
+Verção: 1.1         
+Responsável: Carlos Martins 
+
+## Caso de Uso 1: Login / Cadastro de Conta
+
+Ator Principal: Usuário
+
+### Pré-Condições:
+		O usuário deve acessar o aplicativo pela primeira vez ou desejar criar uma nova conta no sistema.
+
+### Fluxo Principal:
+
+ 	O usuário seleciona a opção de cadastro ou login.
+	Caso escolha cadastro, informa dados pessoais e credenciais.
+	Caso escolha login, insere usuário e senha cadastrados.
+	O sistema valida as informações.
+
+### Fluxo Alternativo:
+
+	Credenciais incorretas → sistema exibe mensagem de erro e solicita nova tentativa.
+
+### Pós-Condições:
+
+	O usuário terá acesso à **Página Principal** do sistema.
+
+***
+
+## Caso de Uso 2: Inserir Salário Mensal
+
+Ator Principal: Usuário
+
+### Pré-Condições:
+	
+	O sistema identifica que é o início de um novo mês.
+
+### Fluxo Principal:
+
+	O sistema solicita que o usuário informe o valor do salário recebido.
+	O usuário insere o valor.
+	O sistema atualiza o saldo inicial do mês.
+
+### Fluxo Alternativo:
+
+	Se o usuário não informar o valor, o sistema alerta que as recomendações poderão ser imprecisas.
+
+### Pós-Condições:
+	
+	O saldo inicial do mês é atualizado no sistema.
+
+***
+
+## Caso de Uso 3: Cadastro de Dívidas
+
+Ator Principal: Usuário
+
+### Pré-Condições:
+	
+	O usuário já deve estar logado no sistema.
+
+### Fluxo Principal:
+
+	O usuário acessa a seção "Dívidas".
+	Escolhe entre **Dívida Fixa** ou **Dívida Variável**.
+	Informa descrição, valor, data de vencimento e status de pagamento.
+	O sistema registra e atualiza o total de dívidas.
+
+### Fluxo Alternativo:
+
+	Se a data de vencimento já estiver no passado, o sistema marca como “Atrasada” automaticamente.
+
+### Pós-Condições:
+
+	O total de dívidas é atualizado na página principal.
+
+***
+
+## Caso de Uso 4: Cadastro de Investimentos
+
+Ator Principal: Usuário
+
+### Pré-Condições:
+
+	O usuário já deve estar logado no sistema.
+
+### Fluxo Principal:
+
+	O usuário acessa a seção "Investimentos".
+	Informa valor investido e data.
+	O sistema soma o valor informado ao saldo total de investimentos.
+
+### Fluxo Alternativo:
+
+	Caso a data seja inválida, o sistema solicita nova entrada.
+
+### Pós-Condições:
+	
+	O saldo total de investimentos é atualizado na página principal.
+
+***
+
+## Caso de Uso 5: Definir Meta Financeira
+
+Ator Principal: Usuário
+
+### Pré-Condições:
+	
+	O usuário já deve estar logado e ter um salário cadastrado.
+
+### Fluxo Principal:
+
+	O usuário acessa a seção "Metas".
+	Informa objetivo, valor alvo e prazo desejado.
+	O sistema registra a meta e envia os dados para o módulo de IA.
+
+### Fluxo Alternativo:
+	
+	Caso a meta seja inviável no prazo, a IA recomenda ajuste de prazo ou valor.
+
+### Pós-Condições:
+	
+	A meta é registrada e visível na página principal.
+
+***
+
+## Caso de Uso 6: Geração de Recomendações pela IA
+
+Ator Principal: Sistema de IA
+
+### Pré-Condições:
+	
+	O usuário deve ter salário e meta cadastrados.
+
+### Fluxo Principal:
+
+	O sistema de IA coleta dados de salário, dívidas, investimentos e metas.
+	Gera recomendações personalizadas para alcançar a meta.
+	Exibe as recomendações na página principal.
+
+### Fluxo Alternativo:
+	
+	Caso falte algum dado, o sistema alerta o usuário para completar o cadastro.
+
+### Pós-Condições:
+	
+	O usuário recebe recomendações personalizadas de como atingir sua meta.
+
+***

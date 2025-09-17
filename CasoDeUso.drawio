@@ -1,0 +1,102 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="28.1.0">
+  <diagram name="Página-1" id="A_7TPsXVrPfonCtrVj85">
+    <mxGraphModel dx="1990" dy="631" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-1" value="Fazer Login" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-730" y="300" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-6" target="_Apook-ORp9ZnzwH7ccK-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-760" y="420" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-6" target="_Apook-ORp9ZnzwH7ccK-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-6" target="_Apook-ORp9ZnzwH7ccK-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-6" target="_Apook-ORp9ZnzwH7ccK-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-6" target="_Apook-ORp9ZnzwH7ccK-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-6" value="Usuários&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="-800" y="440" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-10" value="Verificar Conta" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-530" y="270" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-11" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-1" target="_Apook-ORp9ZnzwH7ccK-13">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-510" y="400" as="sourcePoint" />
+            <mxPoint x="-350" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-12" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-1" target="_Apook-ORp9ZnzwH7ccK-10">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-576" y="310" as="sourcePoint" />
+            <mxPoint x="-416" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-13" value="Realizar o castro" style="ellipse;whiteSpace=wrap;html=1;direction=west;" vertex="1" parent="1">
+          <mxGeometry x="-600" y="150" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-14" value="Criar Conta" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-730" y="560" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-17" target="_Apook-ORp9ZnzwH7ccK-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-17" target="_Apook-ORp9ZnzwH7ccK-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-17" value="Gerenciar Saldo" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-533" y="360" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-19" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-10" target="_Apook-ORp9ZnzwH7ccK-21">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-220" y="430" as="sourcePoint" />
+            <mxPoint x="-280" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.052;entryY=0.633;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-6" target="_Apook-ORp9ZnzwH7ccK-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-21" value="Acessar App" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="170" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-23" target="_Apook-ORp9ZnzwH7ccK-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-23" value="Gerenciar Contas Fixas" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-533" y="500" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-25" value="Gerenciar Contas Variáveis" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-533" y="640" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-27" value="Gerenciar Investimentos" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-370" y="430" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-29" value="Gerenciar Salário" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="230" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-31" value="Gerenciar Ganhos Variáveis&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="340" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="_Apook-ORp9ZnzwH7ccK-33" target="_Apook-ORp9ZnzwH7ccK-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-33" value="API&#39;s Extenas&amp;nbsp;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="-120" y="585" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_Apook-ORp9ZnzwH7ccK-35" value="Recomendação de Investimento&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-370" y="575" width="120" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
