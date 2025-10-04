@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id            Int           @id @default(autoincrement())
+  nome          String
+  senha         String
+  saldo         Float         @default(0)
+
+  // relações
+  extratos      Extrato[]
+  agendamentos  Agendamento[]
+  boletos       Boleto[]
+  investimentos Investimento[]
+}
+
+model Extrato {
+  id          Int      @id @default(autoincrement())
+  valor       Float
+  data        DateTime @default(now())
+  contraparte String?
+  tipo        String   // "CREDITO" | "DEBITO"
+
+  usuarioId   Int
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Agendamento {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  descricao String?
+  data      DateTime
+  horario   DateTime
+
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Boleto {
+  id        Int      @id @default(autoincrement())
+  cedente   String
+  dataValid DateTime
+  valor     Float
+  status    String   // "PENDENTE" | "PAGO" | "CANCELADO"
+
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Investimento {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  categoria String
+  data      DateTime
+  corretora String
+  valorInvest Float
+
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+}
