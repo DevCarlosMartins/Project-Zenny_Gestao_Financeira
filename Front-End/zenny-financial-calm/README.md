@@ -1,73 +1,65 @@
+# ZENNY - Gerenciador Financeiro Pessoal
 
+## Descrição
+ZENNY é um front-end de um sistema de gerenciamento financeiro pessoal desenvolvido em React + TypeScript com Vite, usando Tailwind CSS, Supabase e Radix UI. O projeto faz parte do trabalho em grupo da faculdade e representa a parte de front-end.
 
-## Project info
+## Tecnologias e bibliotecas principais
+- React 18 + TypeScript  
+- Vite 5.x  
+- Tailwind CSS 3.x + tailwind-merge + tailwindcss-animate  
+- Supabase (Auth, Realtime, Postgres, Storage)  
+- Radix UI (Accordion, Dialog, Popover, Toast, etc.)  
+- Recharts (Gráficos)  
+- React Hook Form + Zod  
+- React Query (Tanstack)  
+- Embla Carousel, Lucide Icons, Sonner, cmdk  
+- Hooks customizados: `useAuth`, `useSidebar`, `useTransactions`, `useGoals`, `useKpis`, etc.
 
+## Estrutura de pastas principal
+zenny-financial-calm/
+├─ public/ (imagens e robots.txt)
+├─ src/
+│ ├─ assets/ (logos e imagens)
+│ ├─ components/
+│ │ ├─ layout/ (Header, Sidebar, Overlay)
+│ │ ├─ modals/ (AddTransactionModal)
+│ │ ├─ tables/ (TransactionTable)
+│ │ └─ ui/ (todos os componentes UI: Button, Card, Chart, Accordion, etc.)
+│ ├─ hooks/ (hooks customizados)
+│ ├─ integrations/supabase/ (client.ts, types.ts)
+│ ├─ lib/ (utils)
+│ ├─ mocks/ (dados mockados: transactions, kpis, goals)
+│ └─ pages/ (Home, Accounts, Expenses, Goals, Login, Profile, Reports, Settings, Support, Transactions, NotFound)
+├─ package.json
+├─ tsconfig.json
+├─ vite.config.ts
+├─ tailwind.config.ts
+├─ postcss.config.js
+└─ README.md
 
+markdown
+Copiar código
 
-## How can I edit this code?
+## Instalação e configuração
+1. Clonar o repositório do grupo: `git clone <url-do-repo-do-grupo> && cd Project-Zenny_Gestao_Financeira/Front-End/zenny-financial-calm`  
+2. Instalar dependências: `pnpm install` (ou `npm install` / `yarn install`)  
+3. Criar arquivo `.env` com variáveis do Supabase:  
+VITE_SUPABASE_URL=<url-do-projeto>
+VITE_SUPABASE_ANON_KEY=<chave-anon>
 
-There are several ways of editing your application.
+markdown
+Copiar código
+4. Rodar o projeto: `pnpm run dev` → Acesse `http://localhost:8080/`  
 
+## Scripts principais
+- `pnpm run dev` → inicia o servidor de desenvolvimento  
+- `pnpm run build` → cria build para produção  
+- `pnpm run preview` → pré-visualiza build  
 
-
-
-
-
-
-**Use your preferred IDE**
-
-
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-
-
-
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-
+## Observações
+- O front-end está totalmente integrado ao repositório do grupo, sem submódulos.  
+- Usa lockfile `pnpm-lock.yaml` para consistência de pacotes.  
+- Compatível com Node 18+ e PNPM 9+.  
+- Componentes Radix UI são amplamente usados para UI/UX consistente.  
+- O projeto ainda está em desenvolvimento; algumas páginas e funcionalidades podem usar dados mockados.  
+- O README pode ser atualizado conforme novas features forem adicionadas.
