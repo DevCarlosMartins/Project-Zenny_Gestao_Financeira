@@ -16,26 +16,27 @@ ZENNY é um front-end de um sistema de gerenciamento financeiro pessoal desenvol
 - Hooks customizados: `useAuth`, `useSidebar`, `useTransactions`, `useGoals`, `useKpis`, etc.
 
 ## Estrutura de pastas principal
+```
 zenny-financial-calm/
-├─ public/ (imagens e robots.txt)
+├─ public/
 ├─ src/
-│ ├─ assets/ (logos e imagens)
+│ ├─ assets/
 │ ├─ components/
-│ │ ├─ layout/ (Header, Sidebar, Overlay)
-│ │ ├─ modals/ (AddTransactionModal)
-│ │ ├─ tables/ (TransactionTable)
-│ │ └─ ui/ (todos os componentes UI: Button, Card, Chart, Accordion, etc.)
-│ ├─ hooks/ (hooks customizados)
-│ ├─ integrations/supabase/ (client.ts, types.ts)
-│ ├─ lib/ (utils)
-│ ├─ mocks/ (dados mockados: transactions, kpis, goals)
-│ └─ pages/ (Home, Accounts, Expenses, Goals, Login, Profile, Reports, Settings, Support, Transactions, NotFound)
+│ │ ├─ layout/
+│ │ ├─ modals/
+│ │ └─ ui/
+│ ├─ hooks/
+│ ├─ integrations/supabase/
+│ ├─ lib/
+│ ├─ mocks/
+│ └─ pages/
 ├─ package.json
 ├─ tsconfig.json
 ├─ vite.config.ts
 ├─ tailwind.config.ts
 ├─ postcss.config.js
 └─ README.md
+```
 
 markdown
 Copiar código
