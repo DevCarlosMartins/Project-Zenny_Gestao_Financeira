@@ -2,7 +2,7 @@ import prisma from '../lib/prisma'
 
 export const agendamentoRepository = {
 
-    create: (data: { nome: string; descricao: string | null; data: Date; horario: Date; usuarioId: number}) =>
+    create: (data: { nome: string; descricao?: string | null; data: Date; horario: Date; usuarioId: number}) =>
         prisma.agendamento.create({ data }),
 
     findById: (id: number) =>
