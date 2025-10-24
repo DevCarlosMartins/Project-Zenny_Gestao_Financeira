@@ -1,26 +1,36 @@
-import prisma from "../lib/prisma"
+import prisma from '../lib/prisma';
 
 export const investimentoRepository = {
-  
+
   create: (data: {
-    nome: string
-    categoria: string
-    data: Date
-    corretora: string
-    valorInvest: number
-    usuarioId: number
+    data: Date;
+    corretora: string;
+    valorInvest: number;
+    usuarioId: number;
+    categoriaId?: number | null; // opcional
   }) =>
-    prisma.investimento.create({ data }),
+    prisma.investimento.create({
+      data: {
+        ...data,
+        categoriaId: data.categoriaId ?? undefined, // ignora se não tiver categoria
+      },
+    }),
 
   findById: (id: number) =>
     prisma.investimento.findUnique({
       where: { id },
-      include: { usuario: true },
+      include: {
+        usuario: true,
+        categoria: true,
+      },
     }),
 
   findAll: () =>
     prisma.investimento.findMany({
-      include: { usuario: true },
+      include: {
+        usuario: true,
+        categoria: true,
+      },
     }),
 
   update: (id: number, data: any) =>
@@ -30,5 +40,7 @@ export const investimentoRepository = {
     }),
 
   delete: (id: number) =>
-    prisma.investimento.delete({ where: { id } }),
-}
+    prisma.investimento.delete({
+      where: { id },
+    }),
+};

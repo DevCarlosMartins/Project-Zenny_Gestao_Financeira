@@ -1,22 +1,20 @@
 import { investimentoRepository } from "../repositories/investimentoRepository"
 
 export const investimentoService = {
-  
+
   createInvestimento: async (
-    nome: string,
-    categoria: string,
     data: Date,
     corretora: string,
     valorInvest: number,
-    usuarioId: number
+    usuarioId: number,
+    categoriaId?: number | null
   ) => {
     return investimentoRepository.create({
-      nome,
-      categoria,
       data,
       corretora,
       valorInvest,
       usuarioId,
+      categoriaId: categoriaId ?? undefined,
     })
   },
 

@@ -15,9 +15,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (req.method === "PUT") {
-    const investimento = await investimentoService.updateInvestimento(investimentoId, req.body)
+    const dataToUpdate = { ...req.body }
+    if (dataToUpdate.categoriaId === null) dataToUpdate.categoriaId = undefined
+    const investimento = await investimentoService.updateInvestimento(investimentoId, dataToUpdate)
     return res.status(200).json(investimento)
-  }
+}
+
 
   if (req.method === "DELETE") {
     await investimentoService.deleteInvestimento(investimentoId)

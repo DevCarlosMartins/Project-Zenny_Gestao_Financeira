@@ -8,25 +8,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (req.method === "POST") {
-    const { nome, categoria, data, corretora, valorInvest, usuarioId } = req.body
+    const { data, corretora, valorInvest, usuarioId, categoriaId } = req.body
 
-    if (!nome || !categoria || !data || !corretora || !valorInvest || !usuarioId) {
+    if (!data || !corretora || !valorInvest || !usuarioId) {
       return res.status(400).json({ message: "Campos obrigatórios ausentes" })
     }
 
     try {
       const investimento = await investimentoService.createInvestimento(
-        nome,
-        categoria,
         new Date(data),
         corretora,
-        valorInvest,
-        usuarioId
-      )
+        Number(valorInvest),
+        Number(usuarioId),
+        categoriaId ? Number(categoriaId) : undefined
+)
       return res.status(201).json(investimento)
     } catch (error: any) {
       if (error.code === "P2003") {
-        return res.status(400).json({ message: "Usuário não encontrado. Verifique o usuarioId." })
+        return res.status(400).json({ message: "Usuário ou categoria não encontrados." })
       }
       return res.status(500).json({ message: "Erro ao criar investimento", error: error.message })
     }
