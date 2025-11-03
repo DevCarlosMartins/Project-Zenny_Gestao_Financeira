@@ -23,16 +23,16 @@ const Profile = () => {
 
   return (
     <div className="p-6 max-w-2xl">
-      <h2 className="text-2xl font-bold mb-6">Perfil</h2>
+      <h2 className="text-2xl  font-bold mb-6">Perfil</h2>
       
       <Card>
-        <div className="space-y-4">
+        <div className="space-y-4 m-4">
           <div>
-            <p className="text-sm text-muted-foreground">Email</p>
-            <p className="text-lg font-medium">{user?.email}</p>
+            <p className="text-sm text-muted-foreground ">Email</p>
+            <p className="text-lg font-medium ">{user?.email}</p>
           </div>
 
-          <div className="pt-4 border-t border-white/10">
+          <div className="pt-4 border-t border-white/10 ">
             <Button onClick={handleSignOut} variant="outline">
               Sair da conta
             </Button>
