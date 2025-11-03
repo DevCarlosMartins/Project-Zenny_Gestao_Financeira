@@ -1,0 +1,274 @@
+DOCUMENTO EXPLICANDO PROJETO
+
+
+vc ta fazendo merda, vo te ajudar, aqui ta um relatorio do projeto pra vc parar de errar
+
+
+Relatório do Projeto Zenny - Sistema de Gestão Financeira
+
+1. Visão Geral
+
+O Projeto Zenny é um sistema de gestão financeira desenvolvido por Carlos Eduardo Martins, Gustavo Henrique Dias Marques e Leandro Palozi. O sistema é composto por uma arquitetura moderna dividida em Front-End e Back-End.
+
+2. Arquitetura do Sistema
+
+2.1 Back-End
+
+Tecnologias Principais:
+
+Next.js (Framework TypeScript/Node.js)
+
+Prisma (ORM)
+
+PostgreSQL (Banco de Dados)
+
+2.2 Front-End
+
+Tecnologias Principais:
+
+React com TypeScript
+
+Vite (Build tool)
+
+TailwindCSS
+
+Radix UI (Componentes de interface)
+
+Supabase (Backend as a Service)
+
+3. Estrutura do Banco de Dados
+
+Principais Entidades:
+
+Usuario
+
+Gerenciamento de usuários
+
+Controle de saldo
+
+Relacionamentos com outras entidades
+
+Extrato
+
+Registro de transações financeiras
+
+Tipos: Crédito/Débito
+
+Vinculação com sistema de pontos
+
+LogPontos e TotalPontos
+
+Sistema de recompensas
+
+Tracking de pontos por operação
+
+Agendamento
+
+Gestão de compromissos financeiros
+
+Agenda de pagamentos
+
+Boleto
+
+Gestão de boletos
+
+Estados: Pendente, Pago, Cancelado
+
+Investimento e CategoriaInvest
+
+Controle de investimentos
+
+Categorização de investimentos
+
+Patrocinadora e Cupom
+
+Sistema de descontos
+
+Gestão de patrocinadores
+
+4. Estrutura de Diretórios
+
+Front-End/
+
+└── zenny-financial-calm/
+
+    ├── public/
+
+    │   ├── robots.txt
+
+    │   └── img/
+
+    ├── src/
+
+    │   ├── assets/              # Recursos estáticos
+
+    │   │
+
+    │   ├── components/          # Componentes React reutilizáveis
+
+    │   │   ├── layout/         # Componentes de layout
+
+    │   │   ├── modals/         # Modais e popups
+
+    │   │   ├── tables/         # Componentes de tabelas
+
+    │   │   └── ui/            # Componentes de interface básicos
+
+    │   │
+
+    │   ├── hooks/              # Hooks personalizados do React
+
+    │   │
+
+    │   ├── integrations/       # Integrações com APIs e serviços
+
+    │   │
+
+    │   ├── lib/                # Utilitários e configurações
+
+    │   │
+
+    │   ├── mocks/              # Dados mockados para desenvolvimento
+
+    │   │
+
+    │   ├── pages/              # Páginas da aplicação
+
+    │   │   ├── Accounts.tsx    # Gestão de contas
+
+    │   │   ├── Expenses.tsx    # Controle de despesas
+
+    │   │   ├── Goals.tsx       # Objetivos financeiros
+
+    │   │   ├── Home.tsx        # Página inicial
+
+    │   │   ├── Login.tsx       # Autenticação
+
+    │   │   ├── NotFound.tsx    # Página 404
+
+    │   │   ├── Profile.tsx     # Perfil do usuário
+
+    │   │   ├── Reports.tsx     # Relatórios financeiros
+
+    │   │   ├── Settings.tsx    # Configurações
+
+    │   │   ├── Support.tsx     # Suporte
+
+    │   │   └── Transactions.tsx # Transações financeiras
+
+    │   │
+
+    │   ├── App.tsx             # Componente principal
+
+    │   ├── main.tsx            # Ponto de entrada da aplicação
+
+    │   ├── index.css           # Estilos globais
+
+    │   └── vite-env.d.ts       # Tipagens do ambiente Vite
+
+    │
+
+    ├── supabase/               # Configurações do Supabase
+
+    │   ├── config.toml
+
+    │   └── migrations/
+
+    │
+
+    ├── .eslintrc.json         # Configuração do ESLint
+
+    ├── package.json           # Dependências e scripts
+
+    ├── tailwind.config.ts     # Configuração do Tailwind CSS
+
+    ├── tsconfig.json          # Configuração do TypeScript
+
+    └── vite.config.ts         # Configuração do Vite
+
+
+Dependências Principais:
+
+├── @radix-ui/react-*         # Componentes UI primitivos
+
+├── @supabase/supabase-js     # Cliente Supabase
+
+├── @tanstack/react-query     # Gerenciamento de estado/cache
+
+├── react-router-dom          # Roteamento
+
+├── tailwindcss              # Framework CSS
+
+├── typescript               # Suporte a TypeScript
+
+├── vite                    # Build tool
+
+└── zod                     # Validação de schemas
+
+5. Características Principais
+
+Gestão Financeira Completa
+
+Controle de saldo
+
+Histórico de transações
+
+Gestão de boletos
+
+Sistema de Recompensas
+
+Pontuação por operações
+
+Tracking de pontos
+
+Investimentos
+
+Categorização de investimentos
+
+Registro de operações
+
+Sistema de Cupons
+
+Gestão de descontos
+
+Integração com patrocinadores
+
+Agendamento Financeiro
+
+Gestão de compromissos
+
+Lembretes de pagamentos
+
+6. Arquitetura Técnica
+
+Back-End
+
+API REST com Next.js
+
+ORM Prisma para abstração do banco de dados
+
+Arquitetura em camadas (Repositories e Services)
+
+Front-End
+
+SPA com React e TypeScript
+
+UI moderna com TailwindCSS e Radix
+
+Gerenciamento de estado com React Query
+
+Roteamento com React Router
+
+7. Documentação
+
+O projeto inclui diversos documentos de planejamento:
+
+Casos de Uso
+
+Diagrama de Classes
+
+EAP (Estrutura Analítica do Projeto)
+
+Diamante Duplo (Design Thinking)
+
+Esta é uma aplicação robusta de gestão financeira que combina funcionalidades modernas de controle financeiro com um sistema de recompensas, demonstrando uma arquitetura bem estruturada e uso de tecnologias atuais no desenvolvimento web.

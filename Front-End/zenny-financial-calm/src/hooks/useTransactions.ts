@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { mockTransactions } from '@/mocks/transactions';
 
 export interface Transaction {
   id: string;
@@ -7,63 +7,46 @@ export interface Transaction {
   value: number;
   date: string;
   type: 'entrada' | 'saida';
-  status?: 'pending' | 'completed';
+  status: 'pending' | 'completed';
 }
 
-export const useTransactions = () => {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(true);
+// Helper para garantir que newTransaction está no formato correto
+const createNewTransaction = (
+  transaction: Omit<Transaction, 'id' | 'status'>
+): Transaction => ({
+  ...transaction,
+  id: Math.random().toString(36).substr(2, 9),
+  status: new Date(transaction.date) > new Date() ? 'pending' : 'completed'
+});
 
+export const useTransactions = () => {
+  // Inicializa com dados do localStorage ou dados mockados se não houver nada no localStorage
+  const [transactions, setTransactions] = useState<Transaction[]>(() => {
+    const saved = localStorage.getItem('transactions');
+    return saved ? JSON.parse(saved) : mockTransactions;
+  });
+  const [loading, setLoading] = useState(false);
+
+  // Salva no localStorage sempre que as transações mudarem
   useEffect(() => {
-    fetchTransactions();
-  }, []);
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }, [transactions]);
 
   const fetchTransactions = async () => {
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('transactions')
-        .select('*')
-        .order('date', { ascending: false })
-        .limit(50);
-
-      if (error) throw error;
-
-      if (data) {
-        const mappedTransactions: Transaction[] = data.map(t => ({
-          id: t.id,
-          description: t.description,
-          value: Number(t.value),
-          date: t.date,
-          type: t.type as 'entrada' | 'saida',
-          status: new Date(t.date) > new Date() ? 'pending' : 'completed',
-        }));
-        setTransactions(mappedTransactions);
-      }
-    } catch (error) {
-      console.error('Error fetching transactions:', error);
-    } finally {
-      setLoading(false);
-    }
+    // Agora apenas retorna os dados do estado local
+    return transactions;
   };
 
   const addTransaction = async (transaction: Omit<Transaction, 'id' | 'status'>) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('User not authenticated');
+      const newTransaction = createNewTransaction(transaction);
 
-      const { error } = await supabase
-        .from('transactions')
-        .insert([{
-          user_id: user.id,
-          type: transaction.type,
-          description: transaction.description,
-          value: transaction.value,
-          date: transaction.date,
-        }]);
+      setTransactions(prev => {
+        const updated = [...prev, newTransaction];
+        localStorage.setItem('transactions', JSON.stringify(updated));
+        return updated;
+      });
 
-      if (error) throw error;
-      await fetchTransactions();
       return { success: true };
     } catch (error) {
       console.error('Error adding transaction:', error);
@@ -71,5 +54,26 @@ export const useTransactions = () => {
     }
   };
 
-  return { transactions, loading, refetch: fetchTransactions, addTransaction };
+  const deleteTransaction = async (id: string) => {
+    try {
+      setTransactions(prev => {
+        const updated = prev.filter(t => t.id !== id);
+        localStorage.setItem('transactions', JSON.stringify(updated));
+        return updated;
+      });
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Error deleting transaction:', error);
+      return { success: false, error };
+    }
+  };
+
+  return { 
+    transactions, 
+    loading, 
+    refetch: fetchTransactions, 
+    addTransaction,
+    deleteTransaction
+  };
 };

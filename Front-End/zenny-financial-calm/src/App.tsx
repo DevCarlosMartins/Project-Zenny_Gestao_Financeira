@@ -19,6 +19,7 @@ import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Cupons from './pages/Cupons';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AddTransactionModal } from "@/components/modals/AddTransactionModal";
@@ -70,6 +71,8 @@ const AppContent = () => {
         return 'Transações';
       case '/expenses':
         return 'Meus Gastos';
+          case '/cupons':
+            return 'Cupons';
       case '/accounts':
         return 'Minhas Contas';
       case '/goals':
@@ -128,6 +131,7 @@ const AppContent = () => {
             <Route path="/" element={<Home />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/expenses" element={<Expenses />} />
+              <Route path="/cupons" element={<Cupons />} />
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/goals" element={<Goals />} />
             <Route path="/reports" element={<Reports />} />

@@ -1,3 +1,7 @@
+import { useTransactions } from '@/hooks/useTransactions';
+import { DeleteButton } from '@/components/ui/DeleteButton';
+import { toast } from 'sonner';
+
 interface Transaction {
   id: string;
   description: string;
@@ -13,6 +17,16 @@ interface TransactionTableProps {
 }
 
 export const TransactionTable = ({ transactions, title }: TransactionTableProps) => {
+  const { deleteTransaction } = useTransactions();
+  
+  const handleDelete = async (id: string, description: string) => {
+    const result = await deleteTransaction(id);
+    if (result.success) {
+      toast.success(`${description} foi removida com sucesso`);
+    } else {
+      toast.error('Erro ao remover conta');
+    }
+  };
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -62,15 +76,21 @@ export const TransactionTable = ({ transactions, title }: TransactionTableProps)
                   {transaction.type === 'entrada' ? 'Entrada' : 'Saída'} • {formatDate(transaction.date)}
                 </p>
               </div>
-              <div className="text-right">
-                <p className={`font-semibold ${transaction.type === 'entrada' ? 'text-success' : 'text-foreground'}`}>
-                  {transaction.type === 'entrada' ? '+' : '-'} {formatCurrency(transaction.value)}
-                </p>
-                {transaction.status && (
-                  <p className={`text-xs mt-1 ${getStatusColor(transaction.status)}`}>
-                    {getStatusLabel(transaction.status)}
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <p className={`font-semibold ${transaction.type === 'entrada' ? 'text-success' : 'text-foreground'}`}>
+                    {transaction.type === 'entrada' ? '+' : '-'} {formatCurrency(transaction.value)}
                   </p>
-                )}
+                  {transaction.status && (
+                    <p className={`text-xs mt-1 ${getStatusColor(transaction.status)}`}>
+                      {getStatusLabel(transaction.status)}
+                    </p>
+                  )}
+                </div>
+                <DeleteButton
+                  onDelete={() => handleDelete(transaction.id, transaction.description)}
+                  itemName={transaction.description}
+                />
               </div>
             </div>
           ))
