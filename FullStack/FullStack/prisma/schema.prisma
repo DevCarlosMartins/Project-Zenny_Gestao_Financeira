@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id            Int             @id @default(autoincrement())
+  nome          String
+  senha         String
+  saldo         Float           @default(0)
+
+  // relações
+  extratos      Extrato[]
+  agendamentos  Agendamento[]
+  boletos       Boleto[]
+  investimentos Investimento[]
+  logPontos     LogPontos[]
+}
+
+model Extrato {
+  id          Int       @id @default(autoincrement())
+  valor       Float
+  data        DateTime  @default(now())
+  contraparte String?
+  tipo        String     // "CREDITO" | "DEBITO"
+
+  usuarioId   Int
+  usuario     Usuario   @relation(fields: [usuarioId], references: [id])
+
+  // relação 1:1 com LogPontos
+  logPontos   LogPontos?
+}
+
+model LogPontos {
+  id          Int        @id @default(autoincrement())
+  operacao    String
+
+  usuarioId   Int
+  usuario     Usuario    @relation(fields: [usuarioId], references: [id])
+
+  extratoId   Int?       @unique
+  extrato     Extrato?   @relation(fields: [extratoId], references: [id])
+
+  totalPontos TotalPontos[]
+}
+
+model TotalPontos {
+  id          Int      @id @default(autoincrement())
+  ponto       Int
+
+  logPontoId  Int
+  logPonto    LogPontos @relation(fields: [logPontoId], references: [id])
+}
+
+model Agendamento {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  descricao String?
+  data      DateTime
+  horario   DateTime
+
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Boleto {
+  id        Int      @id @default(autoincrement())
+  cedente   String
+  dataValid DateTime
+  valor     Float
+  status    String   // "PENDENTE" | "PAGO" | "CANCELADO"
+
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model CategoriaInvest {
+  id         Int             @id @default(autoincrement())
+  nome       String
+  descricao  String?
+
+  investimentos Investimento[]
+}
+
+model Investimento {
+  id          Int      @id @default(autoincrement())
+  data        DateTime
+  corretora   String
+  valorInvest Float
+
+  usuarioId   Int
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id])
+
+  categoriaId Int?
+  categoria   CategoriaInvest? @relation(fields: [categoriaId], references: [id])
+}
+
+model Patrocinadora {
+  id         Int      @id @default(autoincrement())
+  nome       String
+  cnpj       String
+  nomeFant   String
+
+  cupons     Cupom[]
+}
+
+model Cupom {
+  id              Int      @id @default(autoincrement())
+  descricao       String?
+  observacao      String?
+  valorDesc       Int
+  codigo          String
+
+  patrocinadoraId Int
+  patrocinadora   Patrocinadora @relation(fields: [patrocinadoraId], references: [id])
+}
