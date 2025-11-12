@@ -3,8 +3,9 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/login": "pages/login.js",
-  "/profile": "pages/profile.js",
   "/api/auth/login": "pages/api/auth/login.js",
-  "/api/usuario/[id]": "pages/api/usuario/[id].js"
+  "/login": "pages/login.js",
+  "/api/boleto": "pages/api/boleto.js",
+  "/api/usuario/[id]": "pages/api/usuario/[id].js",
+  "/api/extrato": "pages/api/extrato.js"
 }

@@ -18,16 +18,12 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('🎯 handleSubmit CHAMADO!', { nome, password }); // ← LOG
     
     setLoading(true);
 
     try {
-      console.log('📤 Tentando fazer login/cadastro...'); // ← LOG
-      
       if (isSignUp) {
         const { error } = await signUp(nome, password);
-        console.log('📥 Resposta do cadastro:', error); // ← LOG
         
         if (error) {
           toast({
@@ -44,7 +40,6 @@ const Login = () => {
         }
       } else {
         const { error } = await signIn(nome, password);
-        console.log('📥 Resposta do login:', error); // ← LOG
         
         if (error) {
           toast({
@@ -53,14 +48,12 @@ const Login = () => {
             variant: 'destructive',
           });
         } else {
-          console.log('✅ Login bem-sucedido! Redirecionando...'); // ← LOG
           router.push('/');
         }
       }
     } catch (error) {
-      console.error('💥 Erro inesperado:', error); // ← LOG
+      console.error('Erro inesperado:', error);
     } finally {
-      console.log('🏁 Finalizando handleSubmit'); // ← LOG
       setLoading(false);
     }
   };

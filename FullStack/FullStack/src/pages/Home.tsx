@@ -8,6 +8,8 @@ import { GoalProgress } from '@/components/ui/GoalProgress';
 import { useKpis } from '@/hooks/useKpis';
 import { useTransactions } from '@/hooks/useTransactions';
 import { useGoals } from '@/hooks/useGoals';
+import { useExtrato } from '@/hooks/useExtrato';
+import { useBoletos } from '@/hooks/useBoleto';
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Overlay } from '@/components/layout/Overlay';
@@ -17,6 +19,8 @@ const Home = () => {
   const { kpis, loading: kpisLoading } = useKpis();
   const { transactions, loading: transactionsLoading } = useTransactions();
   const { goals, loading: goalsLoading } = useGoals();
+  const { extrato, loading: extratoLoading } = useExtrato();
+  const { boletos, loading: boletosLoading } = useBoletos();
   const { user } = useAuth();
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
@@ -27,8 +31,32 @@ const Home = () => {
     }).format(value);
   };
 
-  const upcomingTransactions = transactions;
-  const isLoading = kpisLoading || transactionsLoading || goalsLoading;
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('pt-BR');
+  };
+
+  // Calcular saldo baseado no extrato
+  const calculatedBalance = extrato.entradas - extrato.saidas;
+  
+  // Calcular variação baseada nos últimos meses do extrato
+  const calculateVariationFromExtrato = () => {
+    if (extrato.monthlyData.length < 2) return 0;
+
+    const currentMonth = extrato.monthlyData[extrato.monthlyData.length - 1];
+    const previousMonth = extrato.monthlyData[extrato.monthlyData.length - 2];
+    
+    const currentMonthNet = currentMonth.entradas - currentMonth.saidas;
+    const previousMonthNet = previousMonth.entradas - previousMonth.saidas;
+    
+    if (previousMonthNet === 0) return 0;
+
+    const variation = ((currentMonthNet - previousMonthNet) / Math.abs(previousMonthNet)) * 100;
+    return Math.round(variation * 100) / 100;
+  };
+
+  const calculatedVariation = calculateVariationFromExtrato();
+
+  const isLoading = kpisLoading || transactionsLoading || goalsLoading || extratoLoading || boletosLoading;
 
   if (!user) {
     return (
@@ -53,40 +81,34 @@ const Home = () => {
         onToggle={() => setIsSidebarExpanded(!isSidebarExpanded)} 
       />
       
-      {/* ✅ CORREÇÃO: Overlay só aparece em mobile ou quando sidebar está FECHADA completamente */}
       <Overlay 
-        isVisible={false} // ← MUDAR para false ou ajustar lógica
+        isVisible={false}
         onClick={() => setIsSidebarExpanded(true)} 
       />
       
-      {/* Conteúdo principal */}
       <div className={`transition-all duration-200 ${
         isSidebarExpanded ? 'ml-[22vw] min-ml-[220px] max-ml-[300px]' : 'ml-[72px]'
       }`}>
         <Header title="Dashboard" />
         
         <div className="p-6 space-y-6">
-          {/* Hero section */}
           <div className="mb-8">
             <h2 className="text-3xl font-bold mb-2">Seu dinheiro, em ordem. Hoje.</h2>
             <p className="text-muted-foreground">Visão geral das suas finanças</p>
           </div>
 
-          {/* Grid layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* KPI - Balance */}
             <Card className="p-5">
               <Kpi
                 label="Saldo total"
-                value={formatCurrency(kpis.balance)}
-                trend={kpis.variation}
-                subtitle="vs. mês anterior"
+                value={formatCurrency(calculatedBalance)}
+                trend={calculatedVariation}
+                subtitle="vs. mês anterior (baseado no extrato)"
               />
             </Card>
 
-            {/* Chart - Income vs Expenses */}
             <Card className="p-5">
-              <h3 className="text-lg font-semibold mb-4">Entradas × Saídas</h3>
+              <h3 className="text-lg font-semibold mb-4">Entradas × Saídas (Extrato)</h3>
               <Chart 
                 className="h-[300px]"
                 config={{
@@ -94,27 +116,86 @@ const Home = () => {
                   saidas: { label: 'Saídas', color: '#f43f5e' }
                 }}
               >
-                <RechartsPrimitive.BarChart data={kpis.monthlyData}>
+                <RechartsPrimitive.BarChart data={extrato.monthlyData}>
                   <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
                   <RechartsPrimitive.XAxis dataKey="name" />
                   <RechartsPrimitive.YAxis />
-                  <RechartsPrimitive.Tooltip />
+                  <RechartsPrimitive.Tooltip 
+                    formatter={(value) => formatCurrency(Number(value))}
+                  />
                   <RechartsPrimitive.Legend />
                   <RechartsPrimitive.Bar dataKey="entradas" fill="#4ade80" name="Entradas" />
                   <RechartsPrimitive.Bar dataKey="saidas" fill="#f43f5e" name="Saídas" />
                 </RechartsPrimitive.BarChart>
               </Chart>
+              
+              {/* Resumo do extrato */}
+              <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
+                <div className="text-green-600">
+                  <div className="font-semibold">Total Entradas</div>
+                  <div>{formatCurrency(extrato.entradas)}</div>
+                </div>
+                <div className="text-red-600">
+                  <div className="font-semibold">Total Saídas</div>
+                  <div>{formatCurrency(extrato.saidas)}</div>
+                </div>
+                <div className="col-span-2 border-t pt-2 mt-2">
+                  <div className="flex justify-between items-center">
+                    <div className="font-semibold">Saldo Calculado</div>
+                    <div className={calculatedBalance >= 0 ? 'text-green-600 font-bold' : 'text-red-600 font-bold'}>
+                      {formatCurrency(calculatedBalance)}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </Card>
 
-            {/* Upcoming transactions */}
             <Card className="p-5">
-              <TransactionTable
-                transactions={upcomingTransactions as any}
-                title="Próximas contas a pagar/receber"
-              />
+              <div className="mb-4">
+                <h3 className="text-lg font-semibold">Próximas contas a pagar/receber</h3>
+                <p className="text-sm text-muted-foreground">
+                  {boletos.length} {boletos.length === 1 ? 'boleto pendente' : 'boletos pendentes'}
+                </p>
+              </div>
+              
+              {boletos.length > 0 ? (
+                <div className="space-y-3">
+                  {boletos.slice(0, 5).map((boleto) => (
+                    <div
+                      key={boleto.id}
+                      className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent transition-colors"
+                    >
+                      <div className="flex-1">
+                        <div className="font-medium">{boleto.cedente}</div>
+                        <div className="text-sm text-muted-foreground">
+                          Vence em {formatDate(boleto.dataValid)}
+                        </div>
+                      </div>
+                      <div className={`font-semibold ${
+                        boleto.valor >= 0 ? 'text-green-600' : 'text-red-600'
+                      }`}>
+                        {formatCurrency(boleto.valor)}
+                      </div>
+                    </div>
+                  ))}
+                  {boletos.length > 5 && (
+                    <div className="text-center text-sm text-muted-foreground pt-2">
+                      +{boletos.length - 5} mais boletos
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <div className="text-muted-foreground mb-2">
+                    Nenhum boleto pendente
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Todos os boletos estão em dia!
+                  </div>
+                </div>
+              )}
             </Card>
 
-            {/* Goals progress */}
             <Card className="p-5">
               <h3 className="text-lg font-semibold mb-6">Progresso das metas</h3>
               <div className="space-y-6">

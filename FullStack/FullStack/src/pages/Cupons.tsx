@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CreateCouponModal } from '@/components/modals/CreateCouponModal';
 import { useState } from 'react';
