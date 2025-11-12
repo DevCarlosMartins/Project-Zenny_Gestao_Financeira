@@ -41,19 +41,19 @@ export const useExtrato = () => {
 
       try {
         setLoading(true);
-        
+
         // Busca todos os extratos
         const response = await fetch('/api/extrato');
-        
+
         if (!response.ok) {
           throw new Error('Erro ao buscar extrato');
         }
 
         const allExtratos: ExtratoItem[] = await response.json();
-        
+
         // Filtra apenas os extratos do usuário logado
         const userExtratos = allExtratos.filter(item => item.usuarioId === user.id);
-        
+
         // Processa os dados para o formato necessário
         const processedData = processExtratoData(userExtratos);
         setExtrato(processedData);
@@ -86,9 +86,9 @@ const processExtratoData = (extratos: ExtratoItem[]): ExtratoData => {
   const monthlyData = extratos.reduce((acc, item) => {
     const date = new Date(item.data);
     const monthKey = date.toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' });
-    
+
     const existingMonth = acc.find(m => m.name === monthKey);
-    
+
     if (existingMonth) {
       if (item.tipo === 'CREDITO') {
         existingMonth.entradas += item.valor;
@@ -102,7 +102,7 @@ const processExtratoData = (extratos: ExtratoItem[]): ExtratoData => {
         saidas: item.tipo === 'DEBITO' ? item.valor : 0
       });
     }
-    
+
     return acc;
   }, [] as Array<{ name: string; entradas: number; saidas: number }>);
 
@@ -121,5 +121,23 @@ const processExtratoData = (extratos: ExtratoItem[]): ExtratoData => {
     saidas,
     transactions: extratos.slice(0, 10), // Últimas 10 transações
     monthlyData: lastSixMonths
+  };
+
+  const validarExtratoNoFrontend = (valor: number, tipo: string): string[] => {
+    const erros: string[] = [];
+
+    if (!valor || valor <= 0) {
+      erros.push('O valor deve ser maior que zero');
+    }
+
+    if (valor > 100000) {
+      erros.push('Valor máximo por transação é R$ 100.000,00');
+    }
+
+    if (!['CREDITO', 'DEBITO'].includes(tipo)) {
+      erros.push('Tipo deve ser CREDITO ou DEBITO');
+    }
+
+    return erros;
   };
 };

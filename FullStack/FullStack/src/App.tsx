@@ -9,7 +9,7 @@ import { Overlay } from "@/components/layout/Overlay";
 import { useSidebar } from "@/hooks/useSidebar";
 import { useAuth } from "@/hooks/useAuth";
 import Home from "./pages/Home";
-import Transactions from "./pages/Transactions";
+import Transactions from "./pages/transactions";
 import Expenses from "./pages/expenses";
 import Accounts from "./pages/Accounts";
 import Goals from "./pages/goals";

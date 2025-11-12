@@ -2,10 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/extratos": "pages/extratos.js",
   "/": "pages/index.js",
-  "/api/auth/login": "pages/api/auth/login.js",
-  "/login": "pages/login.js",
+  "/api/extrato": "pages/api/extrato.js",
   "/api/boleto": "pages/api/boleto.js",
-  "/api/usuario/[id]": "pages/api/usuario/[id].js",
-  "/api/extrato": "pages/api/extrato.js"
+  "/api/usuario/[id]": "pages/api/usuario/[id].js"
 }
